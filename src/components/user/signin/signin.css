@@ -1,0 +1,19 @@
+.gridInput{
+    height: 10rem;
+    display: grid;
+    grid-row: 2/3;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto;
+}
+.gridItem{
+    grid-column: 2/3;
+}
+
+.parentGrid{
+    align-content: center;
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-rows: auto auto auto;
+}
+

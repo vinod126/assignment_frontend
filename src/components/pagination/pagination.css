@@ -1,0 +1,10 @@
+/* ul.pagination{
+    position: relative;
+    left: 28vw;
+} */
+
+.paginationHolder {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+}

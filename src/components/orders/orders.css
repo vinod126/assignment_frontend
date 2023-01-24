@@ -1,0 +1,17 @@
+.card{
+    width: 18rem;
+    margin-right: 2vw;
+    margin-bottom: 2vh;
+}
+
+footer{
+        background-color: #c4bbbb;
+            padding: 2vh;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+}
+
+.badge{
+    cursor: pointer;
+}
