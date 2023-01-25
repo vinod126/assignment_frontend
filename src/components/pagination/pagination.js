@@ -11,7 +11,7 @@ import { useEffect } from "react";
 
 function PageNumberBar(props) {
   let active = useSelector((state) => state.pagination.pageNumber);
-  const pageNumbers = Math.ceil(props.totalItems / 20);
+  const pageNumbers = Math.ceil(props.totalItems / 10);
   let items = [];
   let dispatch = useDispatch();
   let beg = useSelector((state) => state.pagination.beg);

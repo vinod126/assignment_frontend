@@ -179,7 +179,7 @@ function Menu(props) {
           dispatch
         );
       });
-  }, [props, reset]);
+  }, [reset]);
 
   return (
     <div>

@@ -11,7 +11,7 @@ function HomePage() {
   let role = sessionStorage.getItem("role");
   let pages = ["Orders", "Food"];
   let cookie = document.cookie;
-
+  console.log("cookie", cookie);
   if (role == "admin") {
     pages.push("Menu");
   }

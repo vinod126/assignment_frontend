@@ -26,6 +26,7 @@ function Orders(props) {
     axios
       .delete(`/review/removeReview?elem=${item.id}`)
       .then((res) => {
+        setRefreshReview(!refreshReview);
         alertDispatch(
           {
             message: `You have rated ${itemName} for ${item.name}`,
@@ -46,12 +47,14 @@ function Orders(props) {
     axios
       .put(`/orders/modifyOrderItems?id=${id}&status=Rejected`)
       .then(() => {
+        setRefresh(!refresh);
         alertDispatch(
           { message: `Rejected ${id} successfully`, variant: "success" },
           dispatch
         );
       })
       .catch((err) => {
+        setRefresh(!refresh);
         alertDispatch(
           { message: err.response.data, variant: "danger" },
           dispatch
@@ -85,7 +88,7 @@ function Orders(props) {
 
   useEffect(() => {
     axios.get("/review/getReview").then((res) => setReview(res.data));
-  }, [refreshReview, props]);
+  }, [props, refreshReview]);
 
   useEffect(() => {
     axios
@@ -106,7 +109,7 @@ function Orders(props) {
           dispatch
         )
       );
-  }, [refresh, props]);
+  }, [refresh]);
 
   return (
     <div>
