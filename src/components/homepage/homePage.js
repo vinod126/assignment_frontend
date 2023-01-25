@@ -3,14 +3,25 @@ import BreadCrumbs from "../breadCrumbs/breadCrumbs";
 const Orders = React.lazy(() => import("../orders/orders"));
 const FoodItems = React.lazy(() => import("../foodItems/foodItems"));
 const Menu = React.lazy(() => import("../menu/menu"));
+const SignIn = React.lazy(() => import("../user/signin/signin"));
 
 function HomePage() {
   //useEffect()
   let [page, setPage] = useState("Food");
   let role = sessionStorage.getItem("role");
   let pages = ["Orders", "Food"];
+  let cookie = document.cookie;
+
   if (role == "admin") {
     pages.push("Menu");
+  }
+
+  if (!cookie) {
+    pages.push("SignIn");
+  } else {
+    if (pages.includes("SignIn")) {
+      pages.splice(pages.indexOf("SignIn", 1));
+    }
   }
   let getPage = (page) => {
     switch (page) {
@@ -18,6 +29,8 @@ function HomePage() {
         return <Orders />;
       case "Menu":
         return <Menu />;
+      case "SignIn":
+        return <SignIn />;
       default:
         return <FoodItems />;
     }

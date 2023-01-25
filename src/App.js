@@ -9,7 +9,7 @@ import Alert from "react-bootstrap/Alert";
 
 function App() {
   const [page, setPage] = useState("SignIn");
-  const [auth, setAuth] = useState(false);
+  const auth = useSelector((state) => state.auth.value);
   const [show, setShow] = useState(false);
   const alert = useSelector((state) => state.alert.value);
 
@@ -18,21 +18,8 @@ function App() {
     setTimeout(() => setShow(false), 5000);
   }, [alert]);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("role")) {
-      setAuth(true);
-    }
-  });
   const getPages = () => {
-    return page == "SignIn" ? (
-      <SignIn
-        setAuth={(authVal) => {
-          setAuth(authVal);
-        }}
-      />
-    ) : (
-      <SignUp />
-    );
+    return page == "SignIn" ? <SignIn /> : <SignUp />;
   };
   return (
     <>

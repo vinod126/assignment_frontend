@@ -162,15 +162,23 @@ function Menu(props) {
   );
 
   useEffect(() => {
-    axios.get("/menu/getMenuItems").then((res) => {
-      let menuStructuredData = {};
-      res.data.forEach((menu) => {
-        let { id } = menu;
-        menuStructuredData[id] = menu;
+    axios
+      .get("/menu/getMenuItems")
+      .then((res) => {
+        let menuStructuredData = {};
+        res.data.forEach((menu) => {
+          let { id } = menu;
+          menuStructuredData[id] = menu;
+        });
+        menuStructuredData["new_menu_item"] = newMenuItem;
+        dispatch(setMenuItems(menuStructuredData));
+      })
+      .catch((err) => {
+        alertDispatch(
+          { message: err.response.data, variant: "danger" },
+          dispatch
+        );
       });
-      menuStructuredData["new_menu_item"] = newMenuItem;
-      dispatch(setMenuItems(menuStructuredData));
-    });
   }, [props, reset]);
 
   return (

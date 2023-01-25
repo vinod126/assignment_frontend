@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./signup.css";
 import * as Yup from "yup";
 import axios from "axios";
+import alertDispatch from "../../../modules/alertDispatch";
+import { useDispatch } from "react-redux";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -9,6 +11,7 @@ function SignUp() {
   const [role, setRole] = useState("user");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(null);
+  const dispatch = useDispatch();
 
   const schema = Yup.object({
     username: Yup.string().required("User name required").min(3),
@@ -32,13 +35,22 @@ function SignUp() {
             `/users/createUser?email=${email}&username=${username}&password=${password}&role=${role}`
           )
           .then((res) => {
-            console.log("User created successfully");
+            alertDispatch(
+              { message: "User creates successfully", variant: "success" },
+              dispatch
+            );
           })
           .catch((err) => {
-            console.log("error : ", err);
+            alertDispatch(
+              { message: err.response.data, variant: "danger" },
+              dispatch
+            );
           });
       } else {
-        setErrMsg("Kindly enter valid values");
+        alertDispatch(
+          { message: "Kindly enter valid values", variant: "danger" },
+          dispatch
+        );
       }
     });
   };

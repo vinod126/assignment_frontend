@@ -4,6 +4,7 @@ import pagination from "./paginationSlice";
 import orderItems from "./orderSlice";
 import menu from "./menuSlice";
 import alert from "./alertSlice";
+import auth from "./authSlice";
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     orderItems,
     menu,
     alert,
+    auth,
   },
 });

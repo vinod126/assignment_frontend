@@ -4,8 +4,8 @@ export const alertSlice = createSlice({
   name: "alert",
   initialState: {
     value: {
-      message: "Welcome!!",
-      variant: "success",
+      message: "",
+      variant: "light",
     },
   },
   reducers: {

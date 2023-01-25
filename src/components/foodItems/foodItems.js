@@ -43,10 +43,18 @@ function FoodItems(props) {
   });
   useEffect(() => {
     //getting food items from databases and setting store in global state container
-    axios.get(`/getFoodItems?offset=${offset}`).then((foodItems) => {
-      dispatch(setFoodData(foodItems.data.data));
-      dispatch(setTotalItems(foodItems.data.length));
-    });
+    axios
+      .get(`/getFoodItems?offset=${offset}`)
+      .then((foodItems) => {
+        dispatch(setFoodData(foodItems.data.data));
+        dispatch(setTotalItems(foodItems.data.length));
+      })
+      .catch((err) => {
+        alertDispatch(
+          { message: err.response.data, variant: "danger" },
+          dispatch
+        );
+      });
   }, [pageNumber]);
 
   return (

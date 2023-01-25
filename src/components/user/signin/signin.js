@@ -2,11 +2,15 @@ import "./signin.css";
 import { useState } from "react";
 import * as Yup from "yup";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import alertDispatch from "../../../modules/alertDispatch";
+import { setAuth } from "../../../modules/authSlice";
 
 function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(null);
+  const dispatch = useDispatch();
   const schema = Yup.object({
     email: Yup.string().required("email is required").email("Invalid email"),
     password: Yup.string()
@@ -24,14 +28,27 @@ function SignIn(props) {
         axios
           .get(`/users/authUser?email=${email}&password=${password}`)
           .then((res) => {
+            alertDispatch(
+              {
+                message: "You have successfully signed in",
+                variant: "success",
+              },
+              dispatch
+            );
             sessionStorage.setItem("role", res.data.role);
-            props.setAuth(true);
+            dispatch(setAuth(true));
           })
           .catch((err) => {
-            setErrMsg(err.response.data);
+            alertDispatch(
+              { message: err.response.data, variant: "danger" },
+              dispatch
+            );
           });
       } else {
-        setErrMsg("Kindly enter valid values");
+        alertDispatch(
+          { message: "Kindly enter valid values", variant: "danger" },
+          dispatch
+        );
       }
     });
   };
