@@ -13,5 +13,5 @@
 ### Install dependencies
 - change directory to cloned directory and run `npm install`
 ### Run the application
-- before starting this application kindly run backend server first
+- before starting this application kindly run backend server first (follow this for backend setup `https://github.com/vinod126/assignment_backend`)
 - after installing dependencies , run application by `npm start`
